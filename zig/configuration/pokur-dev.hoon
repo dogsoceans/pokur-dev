@@ -198,7 +198,7 @@
   =/  args  !<((unit arg-mold) args-vase)
   ?~  args
     ~&  >>>  "Usage:"
-    ~&  >>>  "-pokur!ziggurat-configuration-pokur project-name=@t desk-name=@tas request-id=(unit @t)"
+    ~&  >>>  "-pokur-dev!ziggurat-configuration-pokur-dev project-name=@t desk-name=@tas request-id=(unit @t)"
     (pure:m !>(~))
   =.  project-name  project-name.u.args
   =.  desk-name     desk-name.u.args
