@@ -1,1 +1,1 @@
-../../../uqbar-core/lib/zig/ziggurat.hoon
+../../../dev-suite/lib/zig/ziggurat.hoon
