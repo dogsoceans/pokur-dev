@@ -90,14 +90,12 @@
     =/  who=@p  ~nec
     ;<  contract-hash-vase=vase  bind:m
       %-  send-wallet-transaction:zig-threads
-      :-  project-name
       :^  who  make-service-host
         !>(deploy-contract:zig-threads)
       [who make-escrow-jam-path %.n ~]
     =*  contract-hash  !<(@ux contract-hash-vase)
     ;<  empty-vase=vase  bind:m
       %-  send-discrete-pyro-poke:zig-threads
-      :-  project-name
       :^  who  who  %pokur-host
       :-  %pokur-host-action
       !>  ^-  host-action:pokur
@@ -116,10 +114,8 @@
     ;<  ~  bind:m  (make-set-our-address who)
     ;<  empty-vase=vase  bind:m
       %-  send-wallet-transaction:zig-threads
-      :-  project-name
       :^  who  make-service-host
         !>(send-discrete-pyro-poke:zig-threads)
-      :-  project-name
       :^  who  who  %pokur
       :-  %pokur-player-action
       !>  ^-  player-action:pokur

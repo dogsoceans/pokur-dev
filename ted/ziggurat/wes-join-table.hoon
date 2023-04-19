@@ -84,10 +84,8 @@
   =*  table-id  i.table-ids
   ;<  empty-vase=vase  bind:m
     %-  send-wallet-transaction:zig-threads
-    :-  project-name
     :^  who  sequencer-host
       !>(send-discrete-pyro-poke:zig-threads)
-    :-  project-name
     :^  who  who  %pokur
     :-  %pokur-player-action
     !>  ^-  player-action:pokur
