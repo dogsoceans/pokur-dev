@@ -150,7 +150,6 @@
     ^-  form:m
     ;<  empty-vase=vase  bind:m
       %-  send-discrete-pyro-poke:zig-threads
-      :-  project-name
       :^  who  who  %pokur
       :-  %pokur-player-action
       !>  ^-  player-action:pokur
@@ -163,7 +162,6 @@
     ^-  form:m
     ;<  empty-vase=vase  bind:m
       %-  send-discrete-pyro-poke:zig-threads
-      :-  project-name
       :^  who  who  %pokur
       :-  %pokur-player-action
       !>  ^-  player-action:pokur
