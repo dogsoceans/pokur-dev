@@ -22,15 +22,16 @@
   $:  $:  project-name=@t
           desk-name=@tas
           request-id=(unit @t)
+          repo-host=@p
       ==
   ==
 ::
-++  make-desk-dependencies
+++  make-repo-dependencies
   |=  =bowl:strand
-  ^-  desk-dependencies:zig
+  ^-  repo-dependencies:zig
   ::  REPLACE THIS ON DEPLOYMENT
-  :+  [our.bowl %zig [%da now.bowl] ~]
-    [our.bowl %pokur [%da now.bowl] ~]
+  :+  [our.bowl %zig %master ~]
+    [our.bowl %pokur %master ~]
   ~
 ::
 ++  make-config
@@ -59,14 +60,14 @@
   ~nec
 ::
 ++  run-setup-project
-  |=  request-id=(unit @t)
+  |=  [repo-host=@p request-id=(unit @t)]
   =/  m  (strand ,vase)
   ^-  form:m
   ;<  =bowl:strand  bind:m  get-bowl
   %:  setup-project:zig-threads
+      repo-host
       request-id
-      :: !>(~)
-      (make-desk-dependencies bowl)
+      (make-repo-dependencies bowl)
       make-config
       make-virtualships-to-sync
       make-install
@@ -193,11 +194,12 @@
   =/  args  !<((unit arg-mold) args-vase)
   ?~  args
     ~&  >>>  "Usage:"
-    ~&  >>>  "-pokur-dev!ziggurat-configuration-pokur-dev project-name=@t desk-name=@tas request-id=(unit @t)"
+    ~&  >>>  "-pokur-dev!ziggurat-configuration-pokur-dev project-name=@t desk-name=@tas request-id=(unit @t) repo-host=@p"
     (pure:m !>(~))
   =.  project-name  project-name.u.args
   =.  desk-name     desk-name.u.args
   =*  request-id    request-id.u.args
+  =*  repo-host     repo-host.u.args
   ::
   ~&  %zcp^%top^%0
   ;<  =update:zig  bind:m
@@ -209,7 +211,7 @@
     ?>  ?=(%& -.payload.update)
     p.payload.update
   ;<  setup-desk-result=vase  bind:m
-    (run-setup-project request-id)
+    (run-setup-project repo-host request-id)
   ~&  %zcp^%top^%1
   ;<  setup-ships-zigs-result=vase  bind:m
     setup-virtualship-state:zig-configuration-zig-dev
