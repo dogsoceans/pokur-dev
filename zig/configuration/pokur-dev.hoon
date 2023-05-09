@@ -19,11 +19,11 @@
 |%
 ::
 +$  arg-mold
-  $:  $:  project-name=@t
-          desk-name=@tas
-          request-id=(unit @t)
-          repo-host=@p
-      ==
+  $:  project-name=@t
+      desk-name=@tas
+      request-id=(unit @t)
+      repo-host=@p
+      =long-operation-info:zig
   ==
 ::
 ++  make-repo-dependencies
@@ -60,7 +60,10 @@
   ~nec
 ::
 ++  run-setup-project
-  |=  [repo-host=@p request-id=(unit @t)]
+  |=  $:  repo-host=@p
+          request-id=(unit @t)
+          =long-operation-info:zig
+      ==
   =/  m  (strand ,vase)
   ^-  form:m
   ;<  =bowl:strand  bind:m  get-bowl
@@ -72,6 +75,7 @@
       make-virtualships-to-sync
       make-install
       make-start-apps
+      long-operation-info
   ==
 ::
 ++  setup-virtualship-state
@@ -194,12 +198,13 @@
   =/  args  !<((unit arg-mold) args-vase)
   ?~  args
     ~&  >>>  "Usage:"
-    ~&  >>>  "-pokur-dev!ziggurat-configuration-pokur-dev project-name=@t desk-name=@tas request-id=(unit @t) repo-host=@p"
+    ~&  >>>  "-pokur-dev!ziggurat-configuration-pokur-dev project-name=@t desk-name=@tas request-id=(unit @t) repo-host=@p =long-operation-info:zig"
     (pure:m !>(~))
-  =.  project-name  project-name.u.args
-  =.  desk-name     desk-name.u.args
-  =*  request-id    request-id.u.args
-  =*  repo-host     repo-host.u.args
+  =.  project-name         project-name.u.args
+  =.  desk-name            desk-name.u.args
+  =*  request-id           request-id.u.args
+  =*  repo-host            repo-host.u.args
+  =*  long-operation-info  long-operation-info.u.args
   ::
   ~&  %zcp^%top^%0
   ;<  =update:zig  bind:m
@@ -211,7 +216,8 @@
     ?>  ?=(%& -.payload.update)
     p.payload.update
   ;<  setup-desk-result=vase  bind:m
-    (run-setup-project repo-host request-id)
+    %^  run-setup-project  repo-host  request-id
+    long-operation-info
   ~&  %zcp^%top^%1
   ;<  setup-ships-zigs-result=vase  bind:m
     setup-virtualship-state:zig-configuration-zig-dev
