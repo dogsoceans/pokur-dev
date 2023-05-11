@@ -98,17 +98,18 @@
       :^  who  make-service-host
         !>(deploy-contract:zig-threads)
       [who make-escrow-jam-path %.n ~]
-    =*  contract-hash  !<(@ux contract-hash-vase)
+    =+  !<(contract-hash=(unit @ux) contract-hash-vase)
+    ?~  contract-hash  !!  ::  TODO
     ;<  empty-vase=vase  bind:m
       %-  send-discrete-pyro-poke:zig-threads
       :^  who  who  %pokur-host
       :-  %pokur-host-action
       !>  ^-  host-action:pokur
       :^  %host-info  who  (get-address who)
-      [contract-hash make-town-id]
+      [u.contract-hash make-town-id]
     ;<  ~  bind:m  (make-find-host who)
     ;<  ~  bind:m  (make-set-our-address who)
-    (pure:m contract-hash)
+    (pure:m u.contract-hash)
   ::
   ++  setup-bud
     |=  [project-name=@t contract-hash=@ux]
