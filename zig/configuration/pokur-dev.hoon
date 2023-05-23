@@ -97,7 +97,7 @@
       %-  send-wallet-transaction:zig-threads
       :^  who  make-service-host
         !>(deploy-contract:zig-threads)
-      [who make-escrow-jam-path %.n ~]
+      [[%& who] make-town-id make-escrow-jam-path %.n ~]
     =+  !<(contract-hash=(unit @ux) contract-hash-vase)
     ?~  contract-hash  !!  ::  TODO
     ;<  empty-vase=vase  bind:m
