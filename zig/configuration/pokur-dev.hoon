@@ -81,7 +81,7 @@
 ++  setup-virtualship-state
   =/  m  (strand ,vase)
   ^-  form:m
-  ;<  state=state-0:zig  bind:m  get-state:zig-threads
+  ;<  state=state-1:zig  bind:m  get-state:zig-threads
   =*  configs  configs.state
   |^
   ;<  contract-hash=@ux  bind:m  setup-nec
